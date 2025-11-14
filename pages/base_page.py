@@ -58,6 +58,43 @@ class BasePage:
             EC.visibility_of_element_located(locator)
         )
 
+    def wait_for_visibility(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located(locator)
+        )
+
+    def wait_for_invisibility(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(locator)
+        )
+
+    def wait_for_element_with_text(self, locator, timeout=10):
+        element = self.wait_for_visibility(locator, timeout)
+        WebDriverWait(self.driver, timeout).until(
+            lambda driver: element.text.strip() != ""
+        )
+        return element
+
+    def wait_for_presence_of_element(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_element_located(locator)
+        )
+
+    def wait_for_element_to_be_absent(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until_not(
+            EC.presence_of_element_located(locator)
+        )
+
+    def wait_for_element_to_disappear(self, locator, timeout=10):
+        try:
+            self.wait_for_presence_of_element(locator, timeout=3)
+        except:
+            pass
+        self.wait_for_element_to_be_absent(locator, timeout)
+
+    def get_current_url(self):
+        return self.driver.current_url
+
     def close_ingredient_modal_if_open(self):
         try:
             if self.is_visible(ConstructorPageLocators.DETAILS_INGREDIENT, timeout=3):
@@ -72,8 +109,3 @@ class BasePage:
         source = self.wait_for_clickable(source_locator)
         target = self.wait_for_clickable(target_locator)
         drag_and_drop_js(self.driver, source, target)
-
-    def wait_for_visibility(self, locator, timeout=10):
-        return WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_element_located(locator)
-        )

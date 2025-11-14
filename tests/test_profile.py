@@ -2,6 +2,7 @@ import allure
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
 from pages.profile_page import ProfilePage
+from data.test_data import URLs
 
 
 @allure.epic("UI тесты")
@@ -18,7 +19,7 @@ class TestProfile:
         login_page.login(registered_user["email"], registered_user["password"])
 
         main_page.go_to_personal_account()
-        assert "/account" in browser.current_url
+        assert URLs.ACCOUNT in login_page.get_current_url()
 
     @allure.title("Переход в Историю заказов")
     def test_navigate_to_order_history(self, browser, registered_user):
@@ -34,7 +35,7 @@ class TestProfile:
         profile_page.wait_for_profile_page_loaded()
         profile_page.go_to_order_history()
 
-        assert "/account/order-history" in browser.current_url
+        assert URLs.ORDER_HISTORY in profile_page.get_current_url()
 
     @allure.title("Выход из аккаунта")
     def test_logout_from_account(self, browser, registered_user):
@@ -50,6 +51,6 @@ class TestProfile:
         profile_page.wait_for_profile_page_loaded()
         profile_page.click_logout_button()
 
-        login_page.wait_for_url_to_contain("/login")
+        login_page.wait_for_url_to_contain(URLs.LOGIN)
 
-        assert "/login" in browser.current_url
+        assert URLs.LOGIN in profile_page.get_current_url()

@@ -1,7 +1,8 @@
 import allure
 from pages.base_page import BasePage
 from locators.profile_page_locators import ProfilePageLocators
-from selenium.webdriver.common.by import By
+
+# from selenium.webdriver.common.by import By
 
 
 class ProfilePage(BasePage):
@@ -21,8 +22,9 @@ class ProfilePage(BasePage):
 
     @allure.step("Проверить наличие заказа '{order_number}'")
     def is_order(self, order_number):
-        order_locator = (By.XPATH, f".//p[text()='#0{order_number}']")
-        return self.is_visible(order_locator)
+        return self.is_visible(
+            ProfilePageLocators.ORDER_BY_NUMBER(order_number), timeout=15
+        )
 
     @allure.step("Дождаться загрузки страницы профиля")
     def wait_for_profile_page_loaded(self, timeout=15):

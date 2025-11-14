@@ -1,7 +1,6 @@
 from pages.base_page import BasePage
 from locators.constructor_page_locators import ConstructorPageLocators
 from api.ingredients_api import get_ingredients_by_type
-from selenium.webdriver.common.by import By
 import random
 import allure
 
@@ -43,8 +42,8 @@ class ConstructorPage(BasePage):
 
     @allure.step("Дождаться загрузки ингредиентов")
     def wait_for_ingredients_loaded(self, timeout=15):
-        first_ingredient = (
-            By.XPATH,
-            ".//a[contains(@class, 'BurgerIngredient_ingredient')]",
-        )
-        self.wait_for_visibility(first_ingredient, timeout)
+        # first_ingredient = (
+        #     By.XPATH,
+        #     ".//a[contains(@class, 'BurgerIngredient_ingredient')]",
+        # )
+        self.wait_for_visibility(ConstructorPageLocators.FIRST_INGREDIENT, timeout)

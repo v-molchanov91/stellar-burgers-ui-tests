@@ -9,3 +9,7 @@ class ProfilePageLocators:
         By.XPATH,
         ".//ul[contains(@class, 'OrderHistory_profileList')]",
     )
+
+    @staticmethod
+    def ORDER_BY_NUMBER(order_number):
+        return (By.XPATH, f".//p[text()='#0{order_number}']")

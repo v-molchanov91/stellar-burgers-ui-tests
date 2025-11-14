@@ -23,3 +23,8 @@ class ConstructorPageLocators:
             By.XPATH,
             f"//p[text()='{name}']/preceding-sibling::div[contains(@class, 'counter_counter__ZNLkj')]//p[contains(@class, 'counter_counter__num')]",
         )
+
+    FIRST_INGREDIENT = (
+        By.XPATH,
+        ".//a[contains(@class, 'BurgerIngredient_ingredient')]",
+    )
