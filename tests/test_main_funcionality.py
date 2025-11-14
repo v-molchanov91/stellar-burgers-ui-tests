@@ -43,7 +43,6 @@ class TestMainFunctionality:
     def test_ingredient_counter_increases(self, browser, constructor_page):
         main_page = MainPage(browser)
         main_page.open()
-        # ingredient_name = "Соус Spicy-X"
 
         initial_counter = constructor_page.get_ingredient_counter(
             Ingredients.SAUCE_SPICY

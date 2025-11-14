@@ -42,8 +42,4 @@ class ConstructorPage(BasePage):
 
     @allure.step("Дождаться загрузки ингредиентов")
     def wait_for_ingredients_loaded(self, timeout=15):
-        # first_ingredient = (
-        #     By.XPATH,
-        #     ".//a[contains(@class, 'BurgerIngredient_ingredient')]",
-        # )
         self.wait_for_visibility(ConstructorPageLocators.FIRST_INGREDIENT, timeout)

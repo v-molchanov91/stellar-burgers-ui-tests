@@ -1,7 +1,6 @@
 import allure
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators
-from locators.main_page_locators import MainPageLocators
 
 
 class LoginPage(BasePage):
@@ -12,7 +11,6 @@ class LoginPage(BasePage):
         self.send_keys(LoginPageLocators.INPUT_PASSWORD, password)
         self.click(LoginPageLocators.OPEN_BUTTON)
         self.wait_for_url_to_contain("/")
-        self.wait_for_visibility(MainPageLocators.BUTTON_ORDER, timeout=15)
 
     @allure.step("Открыть страницу восстановления пароля")
     def click_forgot_password_link(self):

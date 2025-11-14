@@ -4,10 +4,6 @@ from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
 from locators.constructor_page_locators import ConstructorPageLocators
 
-# from locators.profile_page_locators import ProfilePageLocators
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-
 
 class MainPage(BasePage):
 
@@ -24,8 +20,6 @@ class MainPage(BasePage):
     @allure.step("Перейти в Личный кабинет")
     def go_to_personal_account(self):
         self.click(MainPageLocators.PERSONAL_ACCOUNT_BUTTON)
-        # self.wait_for_url_to_contain("/account")
-        # self.wait_for_visibility(ProfilePageLocators.PROFILE_HEADER, timeout=15)
 
     @allure.step("Перейти в Конструктор")
     def go_to_constructor(self):
@@ -47,17 +41,6 @@ class MainPage(BasePage):
     @allure.step("Получение номера заказа")
     def place_order(self):
         self.click(MainPageLocators.BUTTON_ORDER)
-        # WebDriverWait(self.driver, 10).until_not(
-        #     EC.presence_of_element_located(MainPageLocators.MODAL_LOADER)
-        # )
-        # WebDriverWait(self.driver, 10).until(
-        #     EC.visibility_of_element_located(MainPageLocators.MODAL_ORDER_SUCCESS)
-        # )
-        # order_num = self.get_text(MainPageLocators.MODAL_ORDER_NUMBER)
-        # self.click(MainPageLocators.EXIT_ORDER_BUTTON)
-        # WebDriverWait(self.driver, 10).until(
-        #     EC.invisibility_of_element_located(MainPageLocators.MODAL_ORDER_NUMBER)
-        # )
         self.wait_for_element_to_disappear(MainPageLocators.MODAL_LOADER)
         self.wait_for_visibility(MainPageLocators.MODAL_ORDER_SUCCESS)
         order_num = self.get_text(MainPageLocators.MODAL_ORDER_NUMBER)

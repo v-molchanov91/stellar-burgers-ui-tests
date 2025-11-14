@@ -2,10 +2,6 @@ import allure
 from pages.base_page import BasePage
 from locators.order_feed_page_locators import OrderFeedPageLocators
 
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-
 
 class OrderFeedPage(BasePage):
 
@@ -16,12 +12,6 @@ class OrderFeedPage(BasePage):
 
     @allure.step("Получить счётчик 'Выполнено за всё время'")
     def get_total_completed_count(self):
-        # element = WebDriverWait(self.driver, 20).until(
-        #     EC.visibility_of_element_located(
-        #         OrderFeedPageLocators.COMPLETE_ORDER_ALL_TIME
-        #     )
-        # )
-        # WebDriverWait(self.driver, 10).until(lambda driver: element.text.strip() != "")
         element = self.wait_for_element_with_text(
             OrderFeedPageLocators.COMPLETE_ORDER_ALL_TIME, timeout=15
         )
@@ -29,10 +19,6 @@ class OrderFeedPage(BasePage):
 
     @allure.step("Получить счётчик 'Выполнено за сегодня'")
     def get_today_completed_count(self):
-        # element = WebDriverWait(self.driver, 20).until(
-        #     EC.visibility_of_element_located(OrderFeedPageLocators.COMPLETE_ORDER_TODAY)
-        # )
-        # WebDriverWait(self.driver, 10).until(lambda driver: element.text.strip() != "")
         element = self.wait_for_element_with_text(
             OrderFeedPageLocators.COMPLETE_ORDER_TODAY, timeout=15
         )
@@ -40,10 +26,6 @@ class OrderFeedPage(BasePage):
 
     @allure.step("Проверить наличие заказа '{order_number}' в разделе 'В работе'")
     def is_order_in_progress(self, order_number):
-        # in_progress_locator = (
-        #     By.XPATH,
-        #     f".//ul[contains(@class, 'OrderFeed_orderListReady__1YFem')]//li[text()='{order_number}']",
-        # )
         return self.is_visible(
             OrderFeedPageLocators.ORDER_IN_PROGRESS(order_number), timeout=15
         )
